@@ -77,6 +77,9 @@ class Authemail(API):
 
         response = self._POST(path, kwargs, payload)
 
+        self.status_code = response.status_code
+        self.last_response = response.copy()
+
         self._set_attrs_to_values(response)
         return response
 
