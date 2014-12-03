@@ -2,7 +2,7 @@ import os
 from setuptools import setup
 
 setup(
-    name='django-rest-authemail',
+    name='django-rest-authemail-anglus',
     version='0.1.4',
     author='Celia Oakley',
     author_email='celia.oakley@alumni.stanford.edu',
