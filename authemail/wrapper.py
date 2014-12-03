@@ -35,6 +35,8 @@ class API(object):
             data=json.dumps(payload) if payload else payload, 
             headers=headers)
 
+        self.last_response = response
+
         response.encoding = 'utf-8'
         return response.json()
 
@@ -64,6 +66,7 @@ class Authemail(API):
         'password_change': '/password/change/',
         'users_me': '/users/me/',
     }
+    
 
     def signup(self, **kwargs):
         path = self._get_path('signup')
@@ -76,9 +79,6 @@ class Authemail(API):
         }
 
         response = self._POST(path, kwargs, payload)
-
-        self.status_code = response.status_code
-        self.last_response = response.copy()
 
         self._set_attrs_to_values(response)
         return response
