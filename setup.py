@@ -6,7 +6,7 @@ setup(
     version='0.1.4',
     author='Celia Oakley',
     author_email='celia.oakley@alumni.stanford.edu',
-    description='A RESTful API for user signup and authentication using email addresses',
+    description='A RESTful API for user signup and authentication using email addresses. Forked by Anglus',
     keywords=[
         'django', 'python', 'rest', 'rest-framework', 'api', 
         'auth', 'authentication', 'email', 'user', 'username', 

@@ -153,11 +153,11 @@ class PasswordReset(APIView):
                 pass
 
             # Since this is AllowAny, don't give away error.
-            content = {'detail': 'Password reset not allowed.'}
+            content = {'detail': 'not_allowed'}
             return Response(content, status=status.HTTP_400_BAD_REQUEST)
 
         else:
-            return Response(serializer.errors, 
+            return Response({'detail':'data_error','errors':serializer.errors}, 
                 status=status.HTTP_400_BAD_REQUEST)
 
 
