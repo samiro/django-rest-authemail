@@ -77,11 +77,12 @@ class SignupVerify(APIView):
                 signup_code.delete()
             except SignupCode.DoesNotExist:
                 pass
-            content = {'detail': 'User verified.'}
-            return render(request,'authemail/signup_verify.html', content)
+            content = {'success': True}
+            
         else:
-            content = {'detail': 'Unable to verify user.'}
-            return render(request,'authemail/signup_verify.html', content)
+            content = {'success': False}
+            
+        return render(request,'authemail/signup_verify.html', content)
 
 
 class Login(APIView):
