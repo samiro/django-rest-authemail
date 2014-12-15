@@ -1,4 +1,5 @@
 from datetime import datetime
+from django.shortcuts import render, get_object_or_404, render_to_response
 from django.contrib.auth import authenticate, get_user_model
 from rest_framework import status
 from rest_framework.authtoken.models import Token
@@ -77,10 +78,10 @@ class SignupVerify(APIView):
             except SignupCode.DoesNotExist:
                 pass
             content = {'success': 'User verified.'}
-            return Response(content, status=status.HTTP_200_OK)
+            return render(request,'authemail/signup_verify.html', content)
         else:
             content = {'detail': 'Unable to verify user.'}
-            return Response(content, status=status.HTTP_400_BAD_REQUEST)
+            return render(request,'authemail/signup_verify.html', content)
 
 
 class Login(APIView):
