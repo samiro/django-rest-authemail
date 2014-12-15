@@ -169,12 +169,12 @@ class PasswordResetVerify(APIView):
 
         try:
             password_reset_code = PasswordResetCode.objects.get(code=code)
-            content = {'success': 'User verified.'}
-            return Response(content, status=status.HTTP_200_OK)
+            content = {'code': code}       
+  
         except PasswordResetCode.DoesNotExist:
-            content = {'detail': 'Unable to verify user.'}
-            return Response(content, status=status.HTTP_400_BAD_REQUEST)
-
+            content = {'detail': 'no_reset'}
+           
+        return render(request,'authemail/password_reset_verify.html', content)
 
 class PasswordResetVerified(APIView):
     permission_classes = (AllowAny,)
