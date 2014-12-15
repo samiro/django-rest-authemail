@@ -191,15 +191,16 @@ class PasswordResetVerified(APIView):
                 password_reset_code = PasswordResetCode.objects.get(code=code)
                 password_reset_code.user.set_password(password)
                 password_reset_code.user.save()
-                content = {'success': 'Password reset.'}
-                return Response(content, status=status.HTTP_200_OK)
+                content = {'detail': True}
+                
             except PasswordResetCode.DoesNotExist:
-                content = {'detail': 'Unable to verify user.'}
-                return Response(content, status=status.HTTP_400_BAD_REQUEST)
+                content = {'detail': False}
+
+            return render(request,'authemail/password_reset_verified.html', content)   
 
         else:
-            return Response(serializer.errors, 
-                status=status.HTTP_400_BAD_REQUEST)
+            content['errors']=serializer.errors
+            return render(request,'authemail/password_reset_verified.html', content)
 
 
 class PasswordChange(APIView):
