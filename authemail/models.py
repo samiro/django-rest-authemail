@@ -134,6 +134,8 @@ class AbstractBaseCode(models.Model):
         txt_file = 'authemail/%s.txt' % prefix
         html_file = 'authemail/%s.html' % prefix
         current_site = Site.objects.get_current()
+        print current_site
+        print current_site_domain
 
         subject = render_to_string(subject_file).strip()
         from_email = settings.DEFAULT_EMAIL_FROM
