@@ -145,9 +145,10 @@ class AbstractBaseCode(models.Model):
             'first_name': self.user.first_name,
             'last_name': self.user.last_name,
             'code': self.code,
+            'current_site_domain': current_site.domain,
             'current_site': current_site
         }
-        
+
         text_content = render_to_string(txt_file, ctxt)
         html_content = render_to_string(html_file, ctxt)
         msg = EmailMultiAlternatives(subject, text_content, from_email, [to],
