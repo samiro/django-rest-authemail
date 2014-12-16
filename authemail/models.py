@@ -8,6 +8,7 @@ from django.core.mail.message import EmailMultiAlternatives
 from django.db import models
 from django.template.loader import render_to_string
 from django.utils import timezone
+from django.contrib.sites.models import Site
 from django.utils.translation import ugettext_lazy as _
 
 
@@ -132,6 +133,7 @@ class AbstractBaseCode(models.Model):
         subject_file = 'authemail/%s_subject.txt' % prefix
         txt_file = 'authemail/%s.txt' % prefix
         html_file = 'authemail/%s.html' % prefix
+        current_site = Site.objects.get_current()
 
         subject = render_to_string(subject_file).strip()
         from_email = settings.DEFAULT_EMAIL_FROM
@@ -142,8 +144,10 @@ class AbstractBaseCode(models.Model):
             'email': self.user.email,
             'first_name': self.user.first_name,
             'last_name': self.user.last_name,
-            'code': self.code
+            'code': self.code,
+            'current_site': current_site
         }
+        
         text_content = render_to_string(txt_file, ctxt)
         html_content = render_to_string(html_file, ctxt)
         msg = EmailMultiAlternatives(subject, text_content, from_email, [to],
