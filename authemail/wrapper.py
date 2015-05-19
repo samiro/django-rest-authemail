@@ -12,7 +12,7 @@ class API(object):
     URLS = {}
 
     def __init__(self):
-        self.base_uri= 'http://127.0.0.1:8000/api'
+        self.base_uri= 'http://bancoldex.anglus.co/api'
 
     def _get_path(self, key):
         return self.BASE_PATH + self.URLS[key]
